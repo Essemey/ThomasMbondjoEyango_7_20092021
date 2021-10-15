@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.recipe{
+    width: 380px;
+    margin-bottom: 50px;
+}
+
+.recipe .representation{
+    background-color: #C7BEBE;
+    height: 178px;
+border-radius: 5px 5px 0px 0px;
+}
+
+.recipe .infos{
+    padding: 20px 20px 15px 20px;
+    background-color: #E7E7E7;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.recipe .infos header{
+    display:flex;
+    flex-direction: row;
+    padding: 0px;
+    justify-content: space-between;
+}
+
+.recipe .infos header h1{
+    font-family: 'Lato';
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 22px;
+}
+
+.recipe .infos header .time{
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 18px;
+ font-weight: bold;
+}
+
+.recipe .infos header .time i{
+margin-right: 5px;
+}
+
+.recipe .infos .ingredients_protocol{
+display: flex;
+margin-top: 20px;
+}
+
+.recipe .infos .ingredients_protocol .protocol{
+font-family: 'Roboto';
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 100%;
+width: 171px;
+height:109px;
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: normal;
+}
+
+.recipe .infos .ingredients_protocol .ingredients{
+    list-style-type: none;
+    width: 171px;
+height:105px;
+margin-right: 10px;
+}
+
+.recipe .infos .ingredients_protocol .ingredients li{
+    font-family: 'Lato';
+font-style: normal;
+font-size: 12px;
+line-height: 14px;
+
+
+}

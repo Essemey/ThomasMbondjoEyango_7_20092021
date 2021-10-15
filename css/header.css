@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+header{
+    padding: 42px 100px 0px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header #logo_container{
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header #logo_container h1{
+font-style: normal;
+font-weight: bold;
+font-size: 36px;
+line-height: 47px;
+color: #D04F4F;
+}
+
+header #research_container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+}
+
+header #tags{
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    margin-top: 25px;
+}
+
+header #tags .tag{
+    width: 107px;
+    height: 37px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 10px;
+    border-radius: 3px;
+    color: white;
+}
+
+header #tags .tags-group{
+    display: inline-flex;
+}
+
+header #tags .tag .remove{
+    cursor: pointer;
+}
+
+
+header #tags .ingredients .tag{
+  background-color: #3282F7;
+}
+
+header #tags .ustensils .tag{
+    background-color: #ED6454;
+}
+
+header #tags .appliances .tag{
+    background-color: #68D9A4;
+}
+
+header #research_container .main_research{
+    display:inline-flex;
+}
+
+header #research_container .main_research input{
+    background-color: #E7E7E7;
+    border-radius: 5px;
+    border: none;
+    font-size:18px;
+    padding: 15px;
+    width: 100%;
+}
+
+header #research_container .main_research i{
+    font-size: 32px;
+    height:fit-content;
+    position: relative;
+    right: 45px;
+    top: 9px;
+}
+
+header #research_container .secondary_research {
+  display: flex;
+  margin-top: 20px;
+}
+
+header #research_container .secondary_research #ingredients {
+    background-color: #3282F7;
+}
+
+header #research_container .secondary_research #appliances {
+    background-color: #68D9A4;
+}
+
+header #research_container .secondary_research #ustensils {
+    background-color:#ED6454;
+}
+
+header #research_container .secondary_research .filter {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  width:170px;
+  height:fit-content;
+  margin-right: 20px;
+}
+
+header #research_container .secondary_research .filter .filter_search {
+  display: inline-flex;
+  background-color: transparent;
+  align-items: center;
+}
+
+header #research_container .secondary_research .filter .filter_search input{
+      font-family: 'Lato';
+font-style: normal;
+font-weight: bold;
+font-size: 18px;
+line-height: 22px;
+border:none;
+outline: none;
+color: #FFFFFF;
+padding: 18px 15px;
+width: 100%;
+background-color: transparent;
+}
+
+header #research_container .secondary_research .filter .filter_search input::placeholder{
+    color: #FFFFFF;
+}
+
+header #research_container .secondary_research .filter .filter_search i{
+color: white;
+font-size: 28.5px;
+padding-right: 8px;
+cursor:pointer;
+}
+
+header #research_container .secondary_research #ingredients .filter_list {
+    background-color: #3282F7;
+}
+
+header #research_container .secondary_research #appliances .filter_list {
+    background-color: #68D9A4;
+}
+
+header #research_container .secondary_research #ustensils .filter_list {
+    background-color:#ED6454;
+}
+
+header #research_container .secondary_research .filter .filter_list{
+
+    flex-wrap: wrap;
+    max-width: 867px;
+    width: max-content;
+    height: 497px;
+    padding:15px;
+    list-style: none;
+    z-index: 1;
+    border-radius: 0px 5px 5px 5px;
+    position: absolute;
+    margin-top: 53px;
+}
+
+header #research_container .secondary_research .filter .filter_list li{
+    cursor: pointer;
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: fit-content;
+    padding-right: 18px;
+    color: white;
+}
+
