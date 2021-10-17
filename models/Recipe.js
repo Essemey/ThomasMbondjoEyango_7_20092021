@@ -13,6 +13,11 @@ export default class Recipe {
     }
 
 
+    collect() {
+
+        return new Set([this.appliance, ...this.ustensils, ...this.ingredients.map(item => item.ingredient)])
+    }
+
     render() {
 
         return `<article class="recipe">

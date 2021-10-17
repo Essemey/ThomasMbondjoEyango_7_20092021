@@ -20,12 +20,12 @@ export default class Appliances extends Category {
 
         const isFocused = () => document.activeElement === filterInput ? true : false
 
-        if (listSize === 0 && isFocused() && first) {
+        if ((listSize === 0 && isFocused()) && first) {
             filterBlock.style.width = '480px'
             return filterList.style.width = '480px'
         }
 
-        if (listSize <= 1 || listSize <= 3 && isFocused()) {
+        if ((listSize <= 1 || listSize <= 3) && isFocused()) {
             filterList.style.width = '170px'
             filterBlock.style.width = '170px'
         }
@@ -50,17 +50,5 @@ export default class Appliances extends Category {
         return appliances
     }
 
-    sort(element, list) {
-
-        const filtered = new Set()
-
-        if (!list) {
-            this.results.recipes.forEach(recipe => recipe.appliance.toLowerCase().indexOf(element) !== -1 && filtered.add(recipe))
-        } else {
-            list.forEach(recipe => recipe.appliance.toLowerCase().indexOf(element) !== -1 && filtered.add(recipe))
-        }
-
-        return filtered
-    }
 
 }

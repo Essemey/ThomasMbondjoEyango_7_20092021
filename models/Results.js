@@ -23,7 +23,6 @@ export default class Results {
 
     actualizeFilters() {
         this.categories.forEach(category => {
-            category.design(this.filteredList.size)
             category.display(category.render(category.collect()))
             category.listenForSelectTag()
         })
@@ -131,9 +130,11 @@ export default class Results {
 
             this.recipes.forEach(recipe => recipe.name.toLowerCase().indexOf(userInputLow) !== -1 && filtered.push(recipe))//Title
 
-            this.categories.forEach(category => {
+            /*this.categories.forEach(category => {
                 filtered.push(...category.sort(userInputLow))
-            })
+            })*/
+
+            filtered.push(...this.categories[0].sort(userInputLow))
 
             return this.filteredList = new Set(filtered)
         }
@@ -143,9 +144,11 @@ export default class Results {
 
         list.forEach(recipe => recipe.name.toLowerCase().indexOf(userInputLow) !== -1 && filtered.push(recipe))//Title
 
-        this.categories.forEach(category => {
+        /*this.categories.forEach(category => {
             filtered.push(...category.sort(userInputLow, list))
-        })
+        })*/
+
+        filtered.push(...this.categories[0].sort(userInputLow, list))
 
         if (!filtered.length) { //Si on ne trouve aucune occurence on garde la liste filtrée précédente
             const prevFiltered = this.filteredList

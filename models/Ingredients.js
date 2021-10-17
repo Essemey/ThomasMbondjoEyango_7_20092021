@@ -27,22 +27,25 @@ export default class Ingredients extends Category {
 
         const isFocused = () => document.activeElement === filterInput ? true : false
 
+
         if (listSize === 0 && isFocused() && first) {
+
             filterBlock.style.width = '840px'
             return filterList.style.width = '840px'
         }
 
-        if (listSize <= 1 || listSize <= 3 && isFocused()) {
+        if ((listSize <= 1 || listSize <= 3) && isFocused()) {
 
             filterList.style.width = '170px'
             filterBlock.style.width = '170px'
 
-        } else if (listSize <= 4 || listSize <= 12 && isFocused()) {
+        } else if ((listSize <= 4 || listSize <= 12) && isFocused()) {
 
             filterList.style.width = '480px'
             filterBlock.style.width = '480px'
 
         } else if (listSize > 12 && isFocused()) {
+
             filterList.style.width = '840px'
             filterBlock.style.width = '840px'
         }
@@ -60,23 +63,5 @@ export default class Ingredients extends Category {
     }
 
 
-    sort(element, list) {
-
-        const filtered = new Set()
-
-        console.log(element)
-
-        if (!list) {
-            this.results.recipes.forEach(recipe =>
-                recipe.ingredients.forEach(item => item.ingredient.toLowerCase().indexOf(element) !== -1 && filtered.add(recipe)))
-        } else {
-            list.forEach(recipe => recipe.ingredients.forEach(item =>
-                item.ingredient.toLowerCase().indexOf(element) !== -1 && filtered.add(recipe)))
-        }
-
-        console.log(filtered)
-
-        return filtered
-    }
 
 }
