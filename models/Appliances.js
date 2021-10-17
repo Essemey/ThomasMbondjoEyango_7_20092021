@@ -6,6 +6,34 @@ export default class Appliances extends Category {
     constructor() {
         super()
         this.type = "appliances"
+        this.placeholder = "appareil"
+    }
+
+
+    design(listSize, first) {
+
+        const filterBlock = document.querySelector(`#${this.type}`)
+        const filterInput = document.querySelector(`#${this.type} .filter_search input`)
+        const filterList = document.querySelector(`#${this.type} .filter_list`)
+
+        // if (document.activeElement === filterInput) filterBlock.style.width = '480px'
+
+        const isFocused = () => document.activeElement === filterInput ? true : false
+
+        if (listSize === 0 && isFocused() && first) {
+            filterBlock.style.width = '480px'
+            return filterList.style.width = '480px'
+        }
+
+        if (listSize <= 1 || listSize <= 3 && isFocused()) {
+            filterList.style.width = '170px'
+            filterBlock.style.width = '170px'
+        }
+
+        if (listSize > 3 && isFocused()) {
+            filterList.style.width = '480px'
+            filterBlock.style.width = '480px'
+        }
     }
 
     hydrate(recipes) {

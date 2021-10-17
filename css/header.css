@@ -147,30 +147,38 @@ padding-right: 8px;
 cursor:pointer;
 }
 
+
 header #research_container .secondary_research #ingredients .filter_list {
     background-color: #3282F7;
 }
 
 header #research_container .secondary_research #appliances .filter_list {
     background-color: #68D9A4;
+    width: 480px;
 }
 
 header #research_container .secondary_research #ustensils .filter_list {
     background-color:#ED6454;
+    width: 480px;
+}
+
+header #research_container .secondary_research .filter{
+    transition: width 0.4s;
 }
 
 header #research_container .secondary_research .filter .filter_list{
 
     flex-wrap: wrap;
-    max-width: 867px;
+    max-width: 840px;
     width: max-content;
-    height: 497px;
+    height: auto;
     padding:15px;
     list-style: none;
     z-index: 1;
     border-radius: 0px 5px 5px 5px;
     position: absolute;
-    margin-top: 53px;
+    margin-top: 48px;
+    transition: width 0.4s;
 }
 
 header #research_container .secondary_research .filter .filter_list li{
@@ -181,6 +189,7 @@ header #research_container .secondary_research .filter .filter_list li{
     white-space: nowrap;
     height: fit-content;
     padding-right: 18px;
+    line-height: 25px;
     color: white;
 }
 
