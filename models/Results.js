@@ -132,6 +132,8 @@ export default class Results {
 
             filtered.push(...this.categories[0].sort(userInputLow))
 
+            console.log(filtered)
+
             return this.filteredList = new Set(filtered)
         }
 
