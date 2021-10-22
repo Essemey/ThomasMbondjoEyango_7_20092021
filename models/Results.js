@@ -10,9 +10,7 @@ export default class Results {
         this.search = ''
     }
 
-    addFilters(filters) {
-        filters.forEach(filter => this.categories.push(filter))
-    }
+
 
     actualize() {
         let html = ``
@@ -29,17 +27,9 @@ export default class Results {
         })
     }
 
-    getAllTags() {
-
-        const tags = []
-
-        this.categories.forEach(category => {
-            category.tags.forEach(tag => tags.push({ content: tag, type: category.type }))
-        })
-
-        return tags
+    addFilters(filters) {
+        filters.forEach(filter => this.categories.push(filter))
     }
-
 
     display() {
 
@@ -60,7 +50,6 @@ export default class Results {
                 return this.actualizeFilters()
             }
 
-
         }
 
         let filtered;
@@ -79,26 +68,36 @@ export default class Results {
         })
 
         if (this.search.length && this.start) {
-            console.log('here')
-            this.sort(this.search, filtered)
-            this.actualize()
-            return this.actualizeFilters()
+            return this.sort(this.search, filtered)
         }
-
-        console.log('suite...')
-        console.log(filtered)
 
         this.filteredList = filtered
         this.actualize()
         this.actualizeFilters()
     }
 
+    getAllTags() {
 
+        const tags = []
 
+        this.categories.forEach(category => {
+            category.tags.forEach(tag => tags.push({ content: tag, type: category.type }))
+        })
 
+        return tags
+    }
 
     hydrate(recipes) {
         this.recipes = recipes.map(recipe => new Recipe(recipe))
+    }
+
+    keepTagsFilteredList(list, filtered) {
+        const prevFiltered = list      //On enregistre la liste des recettes filtrées par les tags
+        this.filteredList = new Set(filtered) //On met à jour le contenu avec la nouvelle liste filtrée
+        this.actualize()
+        this.actualizeFilters()
+        return this.filteredList = new Set(prevFiltered) /*Ensuite pour les prochaines recherches on filtre sur la liste filtrée des tags
+        , pas sur celle filtrée précédemment pour etre sur de prendre en compte tous les critères*/
     }
 
     listenForMainSearch() {
@@ -108,11 +107,7 @@ export default class Results {
                 this.search = e.target.value
                 this.start = true
                 //Si on a pas de tags on filtre sur this.recipes sinon on filtre sur la liste déja filtrée
-                const sort = !this.getAllTags().length ? this.sort(this.search) : this.sort(this.search, this.filteredList)
-                if (sort !== 'back') {
-                    this.actualizeFilters()
-                    this.actualize()
-                }
+                !this.getAllTags().length ? this.sort(this.search) : this.sort(this.search, this.filteredList)
             }
         })
     }
@@ -125,9 +120,7 @@ export default class Results {
 
         if (!this.search.length) this.start = false
 
-        if (!list) {
-
-            console.log('pas de liste')
+        if (!list) {  //Si il n'y a pas de liste on filtre sur toutes les recettes
 
             this.recipes.forEach(recipe => recipe.name.toLowerCase().indexOf(userInputLow) !== -1 && filtered.push(recipe))//Title
 
@@ -135,29 +128,19 @@ export default class Results {
                 filtered.push(...category.sort(userInputLow))
             })
 
-            return this.filteredList = new Set(filtered)
+            this.filteredList = new Set(filtered)
+            this.actualizeFilters()
+            return this.actualize()
         }
 
-
-        console.log('liste fournit')
-
+        // Si on a une liste on filtre sur cette liste de recettes
         list.forEach(recipe => recipe.name.toLowerCase().indexOf(userInputLow) !== -1 && filtered.push(recipe))//Title
 
         this.categories.forEach(category => {
             filtered.push(...category.sort(userInputLow, list))
         })
 
-        if (!filtered.length) { //Si on ne trouve aucune occurence on garde la liste filtrée précédente
-            const prevFiltered = this.filteredList
-            this.filteredList = new Set(filtered)
-            this.actualize()
-            this.actualizeFilters()
-            this.filteredList = new Set(prevFiltered)
-            return 'back'
-        }
-
-        this.filteredList = new Set(filtered)
-
+        this.keepTagsFilteredList(list, filtered)
 
     }
 
