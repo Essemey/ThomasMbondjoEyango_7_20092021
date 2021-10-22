@@ -122,29 +122,14 @@ export default class Results {
 
         if (!list) {
 
-            console.log('pas de liste')
-
-            this.recipes.forEach(recipe => recipe.name.toLowerCase().indexOf(userInputLow) !== -1 && filtered.push(recipe))//Title
-
-            /*this.categories.forEach(category => {
-                filtered.push(...category.sort(userInputLow))
-            })*/
-
             filtered.push(...this.categories[0].sort(userInputLow))
 
             console.log(filtered)
 
-            return this.filteredList = new Set(filtered)
+            this.filteredList = new Set(filtered)
+            this.actualizeFilters()
+            return this.actualize()
         }
-
-
-        console.log('liste fournit')
-
-        list.forEach(recipe => recipe.name.toLowerCase().indexOf(userInputLow) !== -1 && filtered.push(recipe))//Title
-
-        /*this.categories.forEach(category => {
-            filtered.push(...category.sort(userInputLow, list))
-        })*/
 
         filtered.push(...this.categories[0].sort(userInputLow, list))
 

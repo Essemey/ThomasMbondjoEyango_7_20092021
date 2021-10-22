@@ -128,8 +128,6 @@ export default class Category {
 
         const filtered = new Set()
 
-        console.log(element)
-
         if (!list) {
             this.results.recipes.forEach(recipe =>
                 recipe.collect().forEach(item => item.toLowerCase().indexOf(element) !== -1 && filtered.add(recipe)))
@@ -138,7 +136,6 @@ export default class Category {
                 item.toLowerCase().indexOf(element) !== -1 && filtered.add(recipe)))
         }
 
-        console.log(filtered)
 
         return filtered
     }
