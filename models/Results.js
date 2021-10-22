@@ -92,12 +92,17 @@ export default class Results {
         this.actualizeFilters()
     }
 
-
-
-
-
     hydrate(recipes) {
         this.recipes = recipes.map(recipe => new Recipe(recipe))
+    }
+
+    keepTagsFilteredList(list, filtered) {
+        const prevFiltered = list      //On enregistre la liste des recettes filtrées par les tags
+        this.filteredList = new Set(filtered) //On met à jour le contenu avec la nouvelle liste filtrée
+        this.actualize()
+        this.actualizeFilters()
+        return this.filteredList = new Set(prevFiltered) /*Ensuite pour les prochaines recherches on filtre sur la liste filtrée des tags
+        , pas sur celle filtrée précédemment pour etre sur de prendre en compte tous les critères*/
     }
 
     listenForMainSearch() {
@@ -107,11 +112,7 @@ export default class Results {
                 this.search = e.target.value
                 this.start = true
                 //Si on a pas de tags on filtre sur this.recipes sinon on filtre sur la liste déja filtrée
-                const sort = !this.getAllTags().length ? this.sort(this.search) : this.sort(this.search, this.filteredList)
-                if (sort !== 'back') {
-                    this.actualizeFilters()
-                    this.actualize()
-                }
+                !this.getAllTags().length ? this.sort(this.search) : this.sort(this.search, this.filteredList)
             }
         })
     }
@@ -150,17 +151,7 @@ export default class Results {
 
         filtered.push(...this.categories[0].sort(userInputLow, list))
 
-        if (!filtered.length) { //Si on ne trouve aucune occurence on garde la liste filtrée précédente
-            const prevFiltered = this.filteredList
-            this.filteredList = new Set(filtered)
-            this.actualize()
-            this.actualizeFilters()
-            this.filteredList = new Set(prevFiltered)
-            return 'back'
-        }
-
-        this.filteredList = new Set(filtered)
-
+        this.keepTagsFilteredList(list, filtered)
 
     }
 
