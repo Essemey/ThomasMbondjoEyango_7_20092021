@@ -77,15 +77,10 @@ export default class Results {
             }
         })
 
-        if (this.search.length && this.start) {
-            console.log('here')
-            this.sort(this.search, filtered)
-            this.actualize()
-            return this.actualizeFilters()
-        }
 
-        console.log('suite...')
-        console.log(filtered)
+        if (this.search.length && this.start) {
+            return this.sort(this.search, filtered)
+        }
 
         this.filteredList = filtered
         this.actualize()
