@@ -122,9 +122,11 @@ export default class Results {
 
         if (!list) {
 
+            console.time('v2')
+
             filtered.push(...this.categories[0].sort(userInputLow))
 
-            console.log(filtered)
+            console.timeEnd('v2')
 
             this.filteredList = new Set(filtered)
             this.actualizeFilters()

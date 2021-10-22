@@ -15,8 +15,6 @@ export default class Recipe {
 
     collect() {
 
-        console.log(this.name)
-
         return new Set([this.appliance, ...this.ustensils, ...this.ingredients.map(item => item.ingredient), this.name])
     }
 
