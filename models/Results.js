@@ -122,11 +122,15 @@ export default class Results {
 
         if (!list) {  //Si il n'y a pas de liste on filtre sur toutes les recettes
 
+            console.time('v1')
+
             this.recipes.forEach(recipe => recipe.name.toLowerCase().indexOf(userInputLow) !== -1 && filtered.push(recipe))//Title
 
             this.categories.forEach(category => {
                 filtered.push(...category.sort(userInputLow))
             })
+
+            console.timeEnd('v1')
 
             this.filteredList = new Set(filtered)
             this.actualizeFilters()
