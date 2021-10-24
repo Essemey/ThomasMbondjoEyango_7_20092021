@@ -133,7 +133,11 @@ export default class Results {
             return this.actualize()
         }
 
+        console.time('v2bis')
+
         filtered.push(...this.categories[0].sort(userInputLow, list))
+
+        console.timeEnd('v2bis')
 
         this.keepTagsFilteredList(list, filtered)
 
