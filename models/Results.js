@@ -138,11 +138,14 @@ export default class Results {
         }
 
         // Si on a une liste on filtre sur cette liste de recettes
+
+        console.time('v1bis')
         list.forEach(recipe => recipe.name.toLowerCase().indexOf(userInputLow) !== -1 && filtered.push(recipe))//Title
 
         this.categories.forEach(category => {
             filtered.push(...category.sort(userInputLow, list))
         })
+        console.timeEnd('v1bis')
 
         this.keepTagsFilteredList(list, filtered)
 
