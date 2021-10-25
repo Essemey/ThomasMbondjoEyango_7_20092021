@@ -10,6 +10,7 @@ export default class Recipe {
         this.description = description
         this.appliance = appliance
         this.ustensils = ustensils
+        this.terms = this.collect()
     }
 
 

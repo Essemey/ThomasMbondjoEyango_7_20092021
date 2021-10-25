@@ -130,7 +130,7 @@ export default class Category {
 
         if (!list) {
             this.results.recipes.forEach(recipe =>
-                recipe.collect().forEach(item => item.toLowerCase().indexOf(element) !== -1 && filtered.add(recipe)))
+                recipe.terms.forEach(item => item.toLowerCase().indexOf(element) !== -1 && filtered.add(recipe)))
         } else {
             list.forEach(recipe => recipe.collect().forEach(item =>
                 item.toLowerCase().indexOf(element) !== -1 && filtered.add(recipe)))
