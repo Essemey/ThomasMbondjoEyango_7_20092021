@@ -2,21 +2,21 @@
 export default class Recipe {
 
     constructor({ id, name, servings, ingredients, time, description, appliance, ustensils }) {
-        this.id = id
-        this.name = name
-        this.servings = servings
-        this.ingredients = ingredients
-        this.time = time
-        this.description = description
-        this.appliance = appliance
-        this.ustensils = ustensils
-        this.terms = this.collect()
+        this.id = id;
+        this.name = name;
+        this.servings = servings;
+        this.ingredients = ingredients;
+        this.time = time;
+        this.description = description;
+        this.appliance = appliance;
+        this.ustensils = ustensils;
+        this.terms = this.collect();
     }
 
 
     collect() {
 
-        return new Set([this.appliance, ...this.ustensils, ...this.ingredients.map(item => item.ingredient), this.name])
+        return new Set([this.appliance, ...this.ustensils, ...this.ingredients.map(item => item.ingredient), this.name]);
     }
 
     render() {
@@ -31,13 +31,13 @@ export default class Recipe {
                         <div class="ingredients_protocol">
                             <ul class="ingredients">
                                 ${this.ingredients.map(item =>
-            `<li><b>${item.ingredient}: </b>${item.quantity !== undefined ? item.quantity : ''} ${item.unit !== undefined ? item.unit : ''}</li>`
-        ).join('')}
+            `<li><b>${item.ingredient}: </b>${item.quantity !== undefined ? item.quantity : ""} ${item.unit !== undefined ? item.unit : ""}</li>`
+        ).join("")}
                             </ul>
                             <p class="protocol">${this.description}</p>
                         </div>
                     </div>
-                </article>`
+                </article>`;
     }
 
 }

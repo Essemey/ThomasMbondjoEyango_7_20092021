@@ -1,51 +1,51 @@
-import Recipe from './Recipe.js'
+import Recipe from "./Recipe.js";
 
 export default class Results {
 
-    constructor(filters) {
-        this.recipes = []
-        this.categories = []
-        this.filteredList = new Set()
-        this.start = false
-        this.search = ''
+    constructor() {
+        this.recipes = [];
+        this.categories = [];
+        this.filteredList = new Set();
+        this.start = false;
+        this.search = "";
     }
 
     addFilters(filters) {
-        filters.forEach(filter => this.categories.push(filter))
+        filters.forEach(filter => this.categories.push(filter));
     }
 
     actualize() {
-        let html = ``
-        this.filteredList.forEach(recipe => html += recipe.render())
+        let html = "";
+        this.filteredList.forEach(recipe => html += recipe.render());
 
-        document.querySelector('main').innerHTML = this.filteredList.size ? html : '<p>Aucune correspondance...</p>'
+        document.querySelector("main").innerHTML = this.filteredList.size ? html : "<p>Aucune correspondance...</p>";
     }
 
     actualizeFilters() {
         this.categories.forEach(category => {
-            category.display(category.render(category.collect()))
-            category.listenForSelectTag()
-        })
+            category.display(category.render(category.collect()));
+            category.listenForSelectTag();
+        });
     }
 
     getAllTags() {
 
-        const tags = []
+        const tags = [];
 
         this.categories.forEach(category => {
-            category.tags.forEach(tag => tags.push({ content: tag, type: category.type }))
-        })
+            category.tags.forEach(tag => tags.push({ content: tag, type: category.type }));
+        });
 
-        return tags
+        return tags;
     }
 
 
     display() {
 
-        let html = ``
-        this.recipes.forEach(recipe => html += recipe.render())
+        let html = "";
+        this.recipes.forEach(recipe => html += recipe.render());
 
-        document.querySelector('main').innerHTML = html
+        document.querySelector("main").innerHTML = html;
     }
 
     filter() {
@@ -54,9 +54,9 @@ export default class Results {
 
             if (!this.search.length) {
 
-                this.filteredList = new Set(this.recipes) //On affiche toutes les recettes
-                this.actualize()
-                return this.actualizeFilters()
+                this.filteredList = new Set(this.recipes); //On affiche toutes les recettes
+                this.actualize();
+                return this.actualizeFilters();
             }
 
 
@@ -66,80 +66,80 @@ export default class Results {
 
         this.getAllTags().forEach((tag, index) => {
             if (index === 0) {
-                console.log('1')
+                console.log("1");
 
-                filtered = this.categories.find(category => category.type === tag.type).sort(tag.content) //On trie d'abord sur results.recipes puis
+                filtered = this.categories.find(category => category.type === tag.type).sort(tag.content); //On trie d'abord sur results.recipes puis
 
             } else {
-                console.log('here 2')
-                filtered = this.categories.find(category => category.type === tag.type).sort(tag.content, filtered)
+                console.log("here 2");
+                filtered = this.categories.find(category => category.type === tag.type).sort(tag.content, filtered);
                 //sur le retour du premier trie et ainsi de suite
             }
-        })
+        });
 
 
         if (this.search.length && this.start) {
-            return this.sort(this.search, filtered)
+            return this.sort(this.search, filtered);
         }
 
-        this.filteredList = filtered
-        this.actualize()
-        this.actualizeFilters()
+        this.filteredList = filtered;
+        this.actualize();
+        this.actualizeFilters();
     }
 
     hydrate(recipes) {
-        this.recipes = recipes.map(recipe => new Recipe(recipe))
+        this.recipes = recipes.map(recipe => new Recipe(recipe));
     }
 
     keepTagsFilteredList(list, filtered) {
-        const prevFiltered = list      //On enregistre la liste des recettes filtrées par les tags
-        this.filteredList = new Set(filtered) //On met à jour le contenu avec la nouvelle liste filtrée
-        this.actualize()
-        this.actualizeFilters()
-        return this.filteredList = new Set(prevFiltered) /*Ensuite pour les prochaines recherches on filtre sur la liste filtrée des tags
+        const prevFiltered = list;      //On enregistre la liste des recettes filtrées par les tags
+        this.filteredList = new Set(filtered); //On met à jour le contenu avec la nouvelle liste filtrée
+        this.actualize();
+        this.actualizeFilters();
+        return this.filteredList = new Set(prevFiltered); /*Ensuite pour les prochaines recherches on filtre sur la liste filtrée des tags
         , pas sur celle filtrée précédemment pour etre sur de prendre en compte tous les critères*/
     }
 
     listenForMainSearch() {
 
-        document.querySelector('#research_container .main_research input').addEventListener('input', (e) => {
+        document.querySelector("#research_container .main_research input").addEventListener("input", (e) => {
             if (e.target.value.length >= 3 || this.start) {
-                this.search = e.target.value
-                this.start = true
+                this.search = e.target.value;
+                this.start = true;
                 //Si on a pas de tags on filtre sur this.recipes sinon on filtre sur la liste déja filtrée
-                !this.getAllTags().length ? this.sort(this.search) : this.sort(this.search, this.filteredList)
+                !this.getAllTags().length ? this.sort(this.search) : this.sort(this.search, this.filteredList);
             }
-        })
+        });
     }
 
 
     sort(userInput, list) {
 
-        const userInputLow = userInput.toLowerCase()
-        const filtered = []
+        const userInputLow = userInput.toLowerCase();
+        const filtered = [];
 
-        if (!this.search.length) this.start = false
+        if (!this.search.length) this.start = false;
 
         if (!list) {
 
-            console.time('v2')
+            console.time("v2");
 
-            filtered.push(...this.categories[0].sort(userInputLow))
+            filtered.push(...this.categories[0].sort(userInputLow));
 
-            console.timeEnd('v2')
+            console.timeEnd("v2");
 
-            this.filteredList = new Set(filtered)
-            this.actualizeFilters()
-            return this.actualize()
+            this.filteredList = new Set(filtered);
+            this.actualizeFilters();
+            return this.actualize();
         }
 
-        console.time('v2bis')
+        console.time("v2bis");
 
-        filtered.push(...this.categories[0].sort(userInputLow, list))
+        filtered.push(...this.categories[0].sort(userInputLow, list));
 
-        console.timeEnd('v2bis')
+        console.timeEnd("v2bis");
 
-        this.keepTagsFilteredList(list, filtered)
+        this.keepTagsFilteredList(list, filtered);
 
     }
 
