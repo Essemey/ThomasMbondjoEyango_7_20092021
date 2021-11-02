@@ -1,0 +1,11 @@
+{
+  "name": "P7",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Essemey/ThomasMbondjoEyango_7_20092021.git",
+  "author": "Essemey <essemeymbondjo@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.1.0"
+  }
+}

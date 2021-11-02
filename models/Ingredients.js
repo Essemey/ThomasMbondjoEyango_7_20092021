@@ -64,7 +64,7 @@ export default class Ingredients extends Category {
 
         const filtered = new Set();
 
-        console.log(element);
+        //console.log(element);
 
         if (!list) {
             this.results.recipes.forEach(recipe =>
@@ -74,7 +74,7 @@ export default class Ingredients extends Category {
                 item.ingredient.toLowerCase().indexOf(element) !== -1 && filtered.add(recipe)));
         }
 
-        console.log(filtered);
+        //console.log(filtered);
 
         return filtered;
     }
