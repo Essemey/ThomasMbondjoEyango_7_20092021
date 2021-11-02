@@ -28,6 +28,7 @@ export default class Ingredients extends Category {
         const isFocused = () => document.activeElement === filterInput ? true : false;
 
         if (listSize === 0 && isFocused() && first) {
+
             filterBlock.style.width = "840px";
             return filterList.style.width = "840px";
         }
@@ -43,6 +44,7 @@ export default class Ingredients extends Category {
             filterBlock.style.width = "480px";
 
         } else if (listSize > 12 && isFocused()) {
+
             filterList.style.width = "840px";
             filterBlock.style.width = "840px";
         }
