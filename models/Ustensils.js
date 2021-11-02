@@ -28,7 +28,7 @@ export default class Ustensils extends Category {
             return filterList.style.width = "480px";
         }
 
-        if (listSize <= 1 || listSize <= 3 && isFocused()) {
+        if ((listSize <= 1 || listSize <= 3) && isFocused()) {
             filterList.style.width = "170px";
             filterBlock.style.width = "170px";
         }

@@ -33,12 +33,12 @@ export default class Ingredients extends Category {
             return filterList.style.width = "840px";
         }
 
-        if (listSize <= 1 || listSize <= 3 && isFocused()) {
+        if ((listSize <= 1 || listSize <= 3) && isFocused()) {
 
             filterList.style.width = "170px";
             filterBlock.style.width = "170px";
 
-        } else if (listSize <= 4 || listSize <= 12 && isFocused()) {
+        } else if ((listSize <= 4 || listSize <= 12) && isFocused()) {
 
             filterList.style.width = "480px";
             filterBlock.style.width = "480px";
