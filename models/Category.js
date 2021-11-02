@@ -123,7 +123,6 @@ export default class Category {
             </div>`);
     }
 
-
     sort(element, list) {
 
         const filtered = new Set();
@@ -139,6 +138,7 @@ export default class Category {
 
         return filtered;
     }
+
 
 
 }
