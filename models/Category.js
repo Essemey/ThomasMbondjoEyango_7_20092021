@@ -123,11 +123,13 @@ export default class Category {
             </div>`);
     }
 
+
     sort(element, list) {
 
         const filtered = new Set();
 
         if (!list) {
+            //this.results.recipes.forEach(recipe => [...recipe.terms].find(item => item.toLowerCase().indexOf(element) !== -1) && filtered.add(recipe));
             this.results.recipes.forEach(recipe =>
                 recipe.terms.forEach(item => item.toLowerCase().indexOf(element) !== -1 && filtered.add(recipe)));
         } else {
@@ -138,7 +140,6 @@ export default class Category {
 
         return filtered;
     }
-
 
 
 }
