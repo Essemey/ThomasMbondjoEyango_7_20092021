@@ -55,7 +55,7 @@ export default class Category {
             filterInput.style.fontSize = "16px";
             filterInput.style.opacity = "0.5";
 
-            this.design(this.filtered.length, true);
+            this.design();
 
 
             filterInput.addEventListener("input", (e) => { //On écoute les changements sur l'input
@@ -66,11 +66,23 @@ export default class Category {
                     this.filtered = [...this.collect()].filter(item => item.indexOf(e.target.value) !== -1);
                 }
 
-                this.design(this.filtered.length);
+                this.design();
                 this.display(this.render(this.filtered));
                 this.listenForSelectTag();
 
             });
+
+            this.resize((controller) => {
+                filterList.classList.replace("visible", "hidden");
+                arrow.innerHTML = "expand_more";
+                filterInput.placeholder = placeholder;
+                filterInput.style.fontSize = fontSize;
+                filterInput.style.opacity = opacity;
+                filterBlock.style.width = "170px";
+                filterList.style.height = "auto";
+                filterInput.blur()
+                controller.abort();
+            })
 
             const controller = new AbortController();
             document.addEventListener("click", (e) => {
@@ -139,6 +151,118 @@ export default class Category {
 
 
         return filtered;
+    }
+
+    resize(action) {
+        const controller = new AbortController();
+        window.addEventListener('resize', () => action(controller), { signal: controller.signal });
+    }
+
+
+    design() {
+
+        const filterBlock = document.querySelector(`#${this.type}`);
+        const filterInput = document.querySelector(`#${this.type} .filter_search input`);
+        const filterList = document.querySelector(`#${this.type} .filter_list`);
+
+        const viewportWidth = document.documentElement.clientWidth
+        const isFocused = () => document.activeElement === filterInput ? true : false;
+
+        if (this.type === 'ingredients') {
+            if (viewportWidth >= 1440 && isFocused()) {
+
+                filterBlock.style.width = "840px";
+                filterList.style.width = "840px";
+                filterList.style.height = "auto";
+                return filterList.style.overflow = "hidden";
+            }
+
+            if (viewportWidth > 1008 && viewportWidth < 1440 && isFocused()) {
+
+                filterBlock.style.width = "405px";
+                filterList.style.width = "405px";
+                filterList.style.height = "300px";
+                return filterList.style.overflowY = "scroll";
+            }
+
+
+            if (viewportWidth > 980 && viewportWidth < 1008 && isFocused()) {
+
+                filterBlock.style.width = "500px";
+                filterList.style.width = "500px";
+                filterList.style.height = "300px";
+                return filterList.style.overflowY = "scroll";
+            }
+
+
+            if (viewportWidth > 840 && viewportWidth < 980 && isFocused()) {
+
+                filterBlock.style.width = "360px";
+                filterList.style.width = "360px";
+                filterList.style.height = "315px";
+                return filterList.style.overflowY = "scroll";
+            }
+
+            if (viewportWidth > 703 && viewportWidth < 840 && isFocused()) {
+
+                filterBlock.style.width = "240px";
+                filterList.style.width = "240px";
+                filterList.style.height = "315px";
+                return filterList.style.overflowY = "scroll";
+            }
+
+            if (viewportWidth > 480 && viewportWidth < 703 && isFocused()) {
+
+                filterBlock.style.width = "80vw";
+                filterList.style.width = "80vw";
+                filterList.style.height = "315px";
+                return filterList.style.overflowY = "scroll";
+            }
+
+            if (viewportWidth < 480 && isFocused()) {
+
+                console.log(window.innerWidth)
+                filterBlock.style.width = "71vw";
+                filterList.style.width = "71vw";
+                filterList.style.height = "315px";
+                return filterList.style.overflowY = "scroll";
+            }
+        }
+
+        if (viewportWidth > 1080 && isFocused()) {
+            filterBlock.style.width = "480px";
+            filterList.style.width = "480px";
+            filterList.style.height = "auto";
+            return filterList.style.overflow = "hidden";
+        }
+
+        if (viewportWidth > 810 && viewportWidth < 1080 && isFocused()) {
+            filterBlock.style.width = "330px";
+            filterList.style.width = "330px";
+            filterList.style.height = "auto";
+            return filterList.style.overflow = "hidden";
+        }
+
+        if (viewportWidth > 704 && viewportWidth < 810 && isFocused()) {
+            filterBlock.style.width = "240px";
+            filterList.style.width = "240px";
+            filterList.style.height = "300px";
+            return filterList.style.overflowY = "scroll";
+        }
+
+        if (viewportWidth > 470 && viewportWidth < 704 && isFocused()) {
+            filterBlock.style.width = "80vw";
+            filterList.style.width = "80vw";
+            filterList.style.height = "auto";
+            return filterList.style.overflowY = "hidden";
+        }
+
+        if (viewportWidth < 470 && isFocused()) {
+            filterBlock.style.width = "70vw";
+            filterList.style.width = "70vw";
+            filterList.style.height = "300px";
+            return filterList.style.overflowY = "scroll";
+        }
     }
 
 
