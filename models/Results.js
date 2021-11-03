@@ -21,7 +21,7 @@ export default class Results {
 
     actualizeFilters() {
         this.categories.forEach(category => {
-            category.design(this.filteredList.size);
+            category.design();
             category.display(category.render(category.collect()));
             category.listenForSelectTag();
         });

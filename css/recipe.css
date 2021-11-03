@@ -76,5 +76,19 @@ font-style: normal;
 font-size: 12px;
 line-height: 14px;
 
-
 }
+
+@media only screen and (max-width: 420px){
+    .recipe{
+        width: 280px;
+    }
+
+    .recipe .infos header .time i {
+        margin-right: 5px;
+        width: 35px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+

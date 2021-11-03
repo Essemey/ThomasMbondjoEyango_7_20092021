@@ -14,30 +14,6 @@ export default class Ustensils extends Category {
         console.log(this.all);
     }
 
-    design(listSize, first) {
-
-        const filterBlock = document.querySelector(`#${this.type}`);
-        const filterInput = document.querySelector(`#${this.type} .filter_search input`);
-        const filterList = document.querySelector(`#${this.type} .filter_list`);
-
-
-        const isFocused = () => document.activeElement === filterInput ? true : false;
-
-        if (listSize === 0 && isFocused() && first) {
-            filterBlock.style.width = "480px";
-            return filterList.style.width = "480px";
-        }
-
-        if ((listSize <= 1 || listSize <= 3) && isFocused()) {
-            filterList.style.width = "170px";
-            filterBlock.style.width = "170px";
-        }
-
-        if (listSize > 3 && isFocused()) {
-            filterList.style.width = "480px";
-            filterBlock.style.width = "480px";
-        }
-    }
 
     collect() {
 
