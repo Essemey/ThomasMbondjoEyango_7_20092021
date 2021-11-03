@@ -54,6 +54,7 @@ header #tags .tag{
 
 header #tags .tags-group{
     display: inline-flex;
+    flex-wrap: wrap;
 }
 
 header #tags .tag .remove{
