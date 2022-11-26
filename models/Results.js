@@ -56,14 +56,9 @@ export default class Results {
 
         this.getAllTags().forEach((tag, index) => {
             if (index === 0) {
-                console.log("1");
-
                 filtered = this.categories.find(category => category.type === tag.type).sort(tag.content); //On trie d'abord sur results.recipes puis
-
             } else {
-                console.log("here 2");
                 filtered = this.categories.find(category => category.type === tag.type).sort(tag.content, filtered);
-                //sur le retour du premier trie et ainsi de suite
             }
         });
 
